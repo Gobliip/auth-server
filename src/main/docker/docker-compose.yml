@@ -1,0 +1,15 @@
+authdb:
+  image: mysql/mysql-server:5.6
+  env_file:
+    - .env.database
+authweb:
+  image: gobliip/auth-server:0.0.1-SNAPSHOT
+  expose:
+    - "5021"
+  links:
+    - authdb
+  external_links:
+    - eureka
+  env_file:
+    - .env.database
+    - .env

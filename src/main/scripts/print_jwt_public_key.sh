@@ -1,0 +1,1 @@
+keytool -storepass $GOBLIIP_STOREPASS -export -keystore ../resources/jwt.jks -alias gobliip-keypair | openssl x509 -inform der -pubkey -noout
