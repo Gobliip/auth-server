@@ -4,6 +4,8 @@ authdb:
     - .env.database
 authweb:
   image: gobliip/auth-server:0.0.1-SNAPSHOT
+  ports:
+    - "5021:5021"
   expose:
     - "5021"
   links:
