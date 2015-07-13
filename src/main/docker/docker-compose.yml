@@ -1,5 +1,5 @@
 authdb:
-  image: mysql/mysql-server:5.6
+  image: mysql:5.6.25
   env_file:
     - .env.database
 authweb:
