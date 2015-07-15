@@ -7,9 +7,7 @@ import java.security.Principal;
 
 import javax.sql.DataSource;
 
-import org.bouncycastle.crypto.generators.RSAKeyPairGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -54,8 +52,7 @@ public class GobliipAuthServerApplication extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/login").setViewName("login");
-		registry.addViewController("/oauth/confirm_access").setViewName(
-				"authorize");
+		registry.addViewController("/oauth/confirm_access").setViewName("authorize");
 	}
 
 	@Configuration
@@ -113,13 +110,7 @@ public class GobliipAuthServerApplication extends WebMvcConfigurerAdapter {
 
 		@Autowired
 		private DataSource dataSource;
-		
-//		@Value("${GOBLIIP_STOREPASS:batman16}")
-//		private String storePass;
-//		
-//		@Value("${GOBLIIP_KEYPASS:superman16}")
-//		private String keyPass;
-		
+	
 
 		@Bean
 		public JwtAccessTokenConverter jwtAccessTokenConverter() throws NoSuchAlgorithmException {
@@ -129,11 +120,6 @@ public class GobliipAuthServerApplication extends WebMvcConfigurerAdapter {
 			kpGenerator.initialize(512);
 			KeyPair keyPair = kpGenerator.generateKeyPair();
 			converter.setKeyPair(keyPair);
-			
-			/*KeyPair keyPair = new KeyStoreKeyFactory(new ClassPathResource(
-					"jwt.jks"), storePass.toCharArray()).getKeyPair(
-					"gobliip-keypair", keyPass.toCharArray());
-			converter.setKeyPair(keyPair);*/
 			
 			return converter;
 		}

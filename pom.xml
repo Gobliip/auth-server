@@ -5,10 +5,11 @@
 
 	<groupId>com.gobliip.auth</groupId>
 	<artifactId>auth-server</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-RELEASE</version>
 	<packaging>jar</packaging>
 
 	<name>gobliip-auth-server</name>
+	<description>Gobliip's SSO server</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
