@@ -3,7 +3,7 @@ authdb:
   env_file:
     - .env.database
 authweb:
-  image: gobliip/auth-server:0.0.1-SNAPSHOT
+  image: gobliip/auth-server:0.0.1-RELEASE
   ports:
     - "5021:5021"
   expose:
