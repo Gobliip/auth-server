@@ -1,9 +1,9 @@
 authdb:
-  image: mysql:5.6.25
+  image: mariadb:10.0.20
   env_file:
     - .env.database
 authweb:
-  image: gobliip/auth-server:0.0.1-SNAPSHOT
+  image: gobliip/auth-server:0.0.1-RELEASE
   ports:
     - "5021:5021"
   expose:
