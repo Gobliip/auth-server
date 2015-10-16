@@ -1,6 +1,6 @@
 package com.gobliip.auth.server.config;
 
-import com.gobliip.auth.server.auth.ClientDetailsService;
+import com.gobliip.auth.server.auth.service.ClientDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +32,7 @@ public class OAuthAuthorizationConfig extends AuthorizationServerConfigurerAdapt
 
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() throws NoSuchAlgorithmException {
-        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        final JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
 
         KeyPairGenerator kpGenerator = KeyPairGenerator.getInstance("RSA");
         kpGenerator.initialize(512);
@@ -43,23 +43,18 @@ public class OAuthAuthorizationConfig extends AuthorizationServerConfigurerAdapt
     }
 
     @Override
-    public void configure(ClientDetailsServiceConfigurer clients)
-            throws Exception {
+    public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
         clients.withClientDetails(clientDetailsService);
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints)
-            throws Exception {
-        endpoints.authenticationManager(authenticationManager)
-                .accessTokenConverter(jwtAccessTokenConverter());
+    public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints.authenticationManager(authenticationManager).accessTokenConverter(jwtAccessTokenConverter());
     }
 
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer oauthServer)
-            throws Exception {
-        oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess(
-                "isAuthenticated()");
+    public void configure(final AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+        oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
     }
 
 }

@@ -3,15 +3,16 @@ package com.gobliip.auth.server.auth.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * Created by lsamayoa on 10/15/15.
  */
 @Entity(name = "oauth_client_details")
-public class OAuthClientDetails {
+public class OAuthClientDetails implements Serializable {
 
     @Id
-    private long id;
+    private Long id;
 
     @Column(name = "client_id")
     private String clientId;
@@ -43,11 +44,11 @@ public class OAuthClientDetails {
     @Column(name = "access_token_validity")
     private Integer accessTokenValidity;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,4 +1,4 @@
-package com.gobliip.auth.server.auth;
+package com.gobliip.auth.server.auth.service;
 
 import com.gobliip.auth.server.auth.model.OAuthClientDetails;
 import org.springframework.beans.factory.annotation.Autowired;

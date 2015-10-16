@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @SessionAttributes("authorizationRequest")
 public class MvcConfig extends WebMvcConfigurerAdapter {
     @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
+    public void addViewControllers(final ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/oauth/confirm_access").setViewName("authorize");
     }

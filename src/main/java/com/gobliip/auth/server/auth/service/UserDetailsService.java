@@ -1,4 +1,4 @@
-package com.gobliip.auth.server.auth;
+package com.gobliip.auth.server.auth.service;
 
 import com.gobliip.auth.server.auth.model.AuthUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,14 +32,6 @@ public class UserDetailsService implements org.springframework.security.core.use
         }
         final AuthUser authUser = authUsers.get(0);
 
-        final User result = new User(
-                authUser.getUsername(),
-                authUser.getPassword(),
-                authUser.isEnabled(),
-                true, // accountNonExpired,
-                true, // credentialsNonExpired,
-                true, // accountNonLocked,
-                authUser.getAuthorities());
-        return result;
+        return authUser;
     }
 }
