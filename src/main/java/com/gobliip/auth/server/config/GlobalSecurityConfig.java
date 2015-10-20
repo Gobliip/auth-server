@@ -1,7 +1,9 @@
 package com.gobliip.auth.server.config;
 
-import com.gobliip.auth.server.auth.service.UserDetailsService;
+import com.gobliip.auth.server.auth.service.AuthUserDetailsService;
+import com.gobliip.auth.server.auth.service.AuthUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
@@ -14,11 +16,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class GlobalSecurityConfig extends GlobalAuthenticationConfigurerAdapter {
     @Autowired
-    private UserDetailsService userDetailsService;
+    private AuthUserDetailsService userDetailsService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void init(final AuthenticationManagerBuilder auth) throws Exception {
-        final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 }

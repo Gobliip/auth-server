@@ -1,6 +1,6 @@
 package com.gobliip.auth.server.config;
 
-import com.gobliip.auth.server.auth.service.ClientDetailsService;
+import com.gobliip.auth.server.oauth.service.OAuthClientDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +27,7 @@ public class OAuthAuthorizationConfig extends AuthorizationServerConfigurerAdapt
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private ClientDetailsService clientDetailsService;
+    private OAuthClientDetailsService OAuthClientDetailsService;
 
 
     @Bean
@@ -44,7 +44,7 @@ public class OAuthAuthorizationConfig extends AuthorizationServerConfigurerAdapt
 
     @Override
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.withClientDetails(clientDetailsService);
+        clients.withClientDetails(OAuthClientDetailsService);
     }
 
     @Override

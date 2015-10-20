@@ -1,5 +1,6 @@
-package com.gobliip.auth.server.auth.model;
+package com.gobliip.auth.server.auth.model.repository;
 
+import com.gobliip.auth.server.auth.model.AuthUser;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**

@@ -1,23 +1,32 @@
 package com.gobliip.auth.server.auth.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Created by lsamayoa on 10/15/15.
  */
-@Entity(name = "authorities")
+@Entity(name = "auth_authorities")
 public class AuthAuthority implements GrantedAuthority, Serializable {
 
     @Id
     private Long id;
 
     @Column(name = "authority")
-    private String authority;
+    @Enumerated(EnumType.STRING)
+    private AuthRole role;
+
+    public AuthAuthority() {
+    }
+
+    @JsonCreator
+    public AuthAuthority(final AuthRole role) {
+        this.role = role;
+    }
 
     public Long getId() {
         return id;
@@ -27,12 +36,17 @@ public class AuthAuthority implements GrantedAuthority, Serializable {
         this.id = id;
     }
 
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    @JsonValue
+    public AuthRole getRole() {
+        return role;
+    }
+
+    public void setRole(AuthRole role) {
+        this.role = role;
     }
 
     @Override
     public String getAuthority() {
-        return authority;
+        return role.toString();
     }
 }

@@ -1,23 +1,31 @@
 package com.gobliip.auth.server.auth.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gobliip.auth.server.oauth.model.OAuthClient;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
+import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.AUTO;
+import static javax.persistence.InheritanceType.JOINED;
 
 /**
  * Created by lsamayoa on 10/15/15.
  */
-@Entity(name = "users")
+@Entity(name = "auth_users")
+@Inheritance(strategy = JOINED)
 public class AuthUser implements UserDetails, Serializable {
 
     @Id
+    @GeneratedValue(strategy = AUTO)
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "password")
@@ -27,12 +35,16 @@ public class AuthUser implements UserDetails, Serializable {
     @Column(name = "enabled")
     private boolean enabled;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = EAGER)
     @JoinTable(
-            name = "user_authorities",
+            name = "auth_user_authorities",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
-    private List<AuthAuthority> authorities = new ArrayList<>();
+    private Set<AuthAuthority> authorities = new HashSet<>();
+
+    @OneToMany(fetch = LAZY, mappedBy = "owner")
+    @JsonIgnore
+    private Set<OAuthClient> oAuthClients = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -65,6 +77,7 @@ public class AuthUser implements UserDetails, Serializable {
         this.username = username;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -81,11 +94,19 @@ public class AuthUser implements UserDetails, Serializable {
         this.enabled = enabled;
     }
 
-    public List<AuthAuthority> getAuthorities() {
+    public Set<AuthAuthority> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(List<AuthAuthority> authorities) {
+    public void setAuthorities(Set<AuthAuthority> authorities) {
         this.authorities = authorities;
+    }
+
+    public Set<OAuthClient> getoAuthClients() {
+        return oAuthClients;
+    }
+
+    public void setoAuthClients(Set<OAuthClient> oAuthClients) {
+        this.oAuthClients = oAuthClients;
     }
 }
