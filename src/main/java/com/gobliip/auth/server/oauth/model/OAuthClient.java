@@ -3,6 +3,7 @@ package com.gobliip.auth.server.oauth.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gobliip.auth.server.auth.model.AuthAuthority;
 import com.gobliip.auth.server.auth.model.AuthUser;
+import com.gobliip.auth.server.common.model.BaseModel;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,7 +18,7 @@ import static javax.persistence.GenerationType.AUTO;
  * Created by lsamayoa on 10/15/15.
  */
 @Entity(name = "oauth_clients")
-public class OAuthClient implements Serializable {
+public class OAuthClient extends BaseModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = AUTO)

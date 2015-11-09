@@ -1,6 +1,7 @@
 package com.gobliip.auth.server.auth.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gobliip.auth.server.common.model.BaseModel;
 import com.gobliip.auth.server.oauth.model.OAuthClient;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,7 +20,7 @@ import static javax.persistence.InheritanceType.JOINED;
  */
 @Entity(name = "auth_users")
 @Inheritance(strategy = JOINED)
-public class AuthUser implements UserDetails, Serializable {
+public class AuthUser extends BaseModel implements UserDetails, Serializable {
 
     @Id
     @GeneratedValue(strategy = AUTO)

@@ -2,6 +2,7 @@ package com.gobliip.auth.server.auth.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.gobliip.auth.server.common.model.BaseModel;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.io.Serializable;
  * Created by lsamayoa on 10/15/15.
  */
 @Entity(name = "auth_authorities")
-public class AuthAuthority implements GrantedAuthority, Serializable {
+public class AuthAuthority extends BaseModel implements GrantedAuthority, Serializable {
 
     @Id
     private Long id;
